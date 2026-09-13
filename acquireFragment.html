@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: rgb(33, 33, 33);
+            color: white;
+        }
+    </style>
+    <title>Twitch Authorization</title>
+</head>
+
+<body>
+    
+    <h1>You can close this window. It could be closed automatically, but thats sus.
+    </h1>
+
+    <p id="result"></p>
+
+    <script>
+        fetch("/token", {
+        method: "POST",
+        body: window.location.hash.substring(1)
+        });
+    </script>
+</body>
+</html>
