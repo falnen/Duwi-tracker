@@ -45,7 +45,7 @@ class liveListener():
                 validationcycle = 0 #Token must be validated every hour.
                 while True:
                     validationcycle += 1
-                    if validationcycle >= 10:
+                    if validationcycle >= 6:
                         validationcycle = 0
                         if not validateToken(self.accesstoken):
                             self._current_websocket.close()
