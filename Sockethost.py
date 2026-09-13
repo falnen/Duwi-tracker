@@ -78,6 +78,8 @@ class liveListener():
             case "session_keepalive":
                 #Sent every APP_TIMEOUT seconds if no notification is received
                 print('Keep alive')
+            case "session_reconnect":
+                self._receiveReconnect(payload)
             case "revocation":
                 self._receiveRevocation(metadata,payload)
     
