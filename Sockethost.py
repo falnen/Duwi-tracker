@@ -4,14 +4,11 @@ from websockets.sync.client import connect,ClientConnection
 from json import loads
 from threading import Timer,Lock
 import requests
-APP_TIMEOUT = 600
-
+APP_TIMEOUT = 600  #INT between 10 and 600
 APP_CLIENT_ID = "5wzg88m34ulgtxj4fdfazf9d2mpxq1"
-#also in main
-
 WS_URL = f'wss://eventsub.wss.twitch.tv/ws?keepalive_timeout_seconds={APP_TIMEOUT}'
 EVENT_SUB_URL = "https://api.twitch.tv/helix/eventsub/subscriptions"
-DUWI_ID = '92395876'
+DUWI_ID = '463761283'
 
 class liveListener():
     def __init__(self):
@@ -108,15 +105,16 @@ class liveListener():
         UI.Root.after(0,UI.Root.deiconify())
         UI.Root.after(0,UI.liveNotif.configure(text='Duwi is LIVE!!!'))
         notification = payload["event"]
+        print(notification)
         #TODO Display aditional info in app
 
     def _receiveReconnect(self,payload:dict):
         new_ws_url = payload["reconnect_url"]
-        print("Reconnecting")
+        print(f"Reconnecting at {new_ws_url}")
         self._old_websocket = self._current_websocket
         self.start(new_ws_url)
 
     def _receiveRevocation(self,metadata:dict,payload:dict):
         self._current_websocket.close()
         #TODO error message display and try again button
-        print(payload["status"])
+        print(payload)
